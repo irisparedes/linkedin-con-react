@@ -29,6 +29,7 @@ class App extends React.Component {
 
    return (
      <div className="App">
+     <h1>La prueba de que guardo cosas</h1>
       <ul>
         {this.state.data.map(item =>
            <li>{item.gender}</li>)}
