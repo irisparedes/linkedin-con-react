@@ -7,8 +7,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      data: []
+      data: [],
+      isWoman: true,
+      isMan: true
     }
+    this.handleClickGender = this.handleClickGender.bind(this);
+
   } 
   componentDidMount () {
     this.fetchNewPeople();
@@ -25,19 +29,35 @@ class App extends React.Component {
 
   }
 
+  handleClickGender (event) {
+    const genderSelect = event.currentTarget.checked;
+    console.log(genderSelect);
+    const id = event.currentTarget.id;
+      this.setState(
+        id === 'female' 
+        ? 
+        {isWoman: genderSelect} 
+        :
+        {isMan: genderSelect}
+      )
+  }
  render() {
+  
 
    return (
      <div className="App">
-     <h1 className="title">LinkeDon</h1>
+      <h1 className="title">LinkeDon</h1>
+      <input type="checkbox" id="male" className="gender__male" onClick={this.handleClickGender}/>Hombre
+      <input type="checkbox" id="female" className="gender__female" onClick={this.handleClickGender}/>mujer
+    
       <ul>
         {this.state.data.map(item =>
            <li>
              <div className="card_container">
-             <img src={item.picture.medium} alt={item.name.first}/>
-             <h2 className="card_name">Nombre: {item.name.first} {item.name.last}</h2>
-             <h3 className="card_city">Ciudad: {item.location.city}</h3>
-             <h4 className="card_age">Edad: {item.dob.age}</h4>
+                <img src={item.picture.medium} alt={item.name.first}/>
+                <h2 className="card_name">Nombre: {item.name.first} {item.name.last}</h2>
+                <h3 className="card_city">Ciudad: {item.location.city}</h3>
+                <h4 className="card_age">Edad: {item.dob.age}</h4>
              </div>
            </li>)}
 
