@@ -3,7 +3,6 @@ import './App.css';
 import {fetchReasons} from './services/ReasonServices';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state= {
@@ -12,8 +11,8 @@ class App extends React.Component {
       isMan: true
     }
     this.handleClickGender = this.handleClickGender.bind(this);
-
   } 
+
   componentDidMount () {
     this.fetchNewPeople();
   }
@@ -24,14 +23,11 @@ class App extends React.Component {
         this.setState ({
           data: data.results
         })
-
       })
-
   }
 
   handleClickGender (event) {
     const genderSelect = event.currentTarget.checked;
-    console.log(genderSelect);
     const id = event.currentTarget.id;
       this.setState(
         id === 'female' 
@@ -42,8 +38,6 @@ class App extends React.Component {
       )
   }
  render() {
-  
-
    return (
      <div className="App">
       <h1 className="title">LinkeDon</h1>
@@ -51,7 +45,9 @@ class App extends React.Component {
       <input type="checkbox" id="female" className="gender__female" onClick={this.handleClickGender}/>mujer
     
       <ul>
-        {this.state.data.map(item =>
+        {this.state.data
+        .filter(obj => obj.gender === 'male')
+        .map(item =>
            <li>
              <div className="card_container">
                 <img src={item.picture.medium} alt={item.name.first}/>
