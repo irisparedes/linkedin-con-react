@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import People from './Components/People';
 import {fetchReasons} from './services/ReasonServices';
 
 class App extends React.Component {
@@ -31,65 +32,29 @@ class App extends React.Component {
     const id = event.currentTarget.id;
       this.setState(
         id === 'female' 
-        ? 
-        {isWoman: genderSelect} 
-        :
-        {isMan: genderSelect}
+        ? {isWoman: genderSelect} 
+        : {isMan: genderSelect}
       )
   }
  render() {
    return (
      <div className="App">
-      <h1 className="title">LinkeDon</h1>
+      <h1 className="title">LinkedOn</h1>
       <input type="checkbox" 
       id="male" 
       className="gender__male" 
       onClick={this.handleClickGender}
-      //checked={this.state.isMan}
+      checked={this.state.isMan}
       />Hombre
       <input type="checkbox" 
       id="female" 
       className="gender__female" 
       onClick={this.handleClickGender}
-      //checked={this.state.isWoman}
+      checked={this.state.isWoman}
       />Mujer
-    
-      <ul>
-        {this.state.data
-        .filter(obj => {
-          return(
-
-            //Esto no pinta na
-            // this.state.isMan === true && this.state.isMan === true 
-            // ? obj.gender === 'female' && obj.gender === 'male' 
-            //   : this.state.isMan === true 
-            //   ? obj.gender === 'male' 
-            //     : this.state.isWoman === true
-            //     ? obj.gender === 'female'
-            //         : ''
-
-
-            //Este tocho de condicional no pinta a los hombres y mujeres
-            // this.state.isMan === true 
-            // ? obj.gender === 'male' 
-            // : this.state.isWoman === true 
-            // ? obj.gender === 'female' 
-            // : this.state.isWoman === true && this.state.isMan === true 
-            // ? obj.gender === 'female' && obj.gender === 'male'
-            // : ''
-
-        )})
-        .map(item =>
-           <li>
-             <div className="card_container">
-                <img src={item.picture.medium} alt={item.name.first}/>
-                <h2 className="card_name">Nombre: {item.name.first} {item.name.last}</h2>
-                <h3 className="card_city">Ciudad: {item.location.city}</h3>
-                <h4 className="card_age">Edad: {item.dob.age}</h4>
-             </div>
-           </li>)}
-
-      </ul>
+      < People data={this.state.data}
+      isWoman={this.state.isWoman}
+      isMan={this.state.isMan} />
      </div>
    );
  }
